@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Image Gallery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>My Image Gallery</h1>
+        <p>Explore beautiful moments around the world</p>
+    </header>
+
+    <nav class="filters" aria-label="Filter images by category">
+        <button type="button" data-filter="all" class="active" aria-pressed="true">All</button>
+        <button type="button" data-filter="nature" aria-pressed="false">Nature</button>
+        <button type="button" data-filter="city" aria-pressed="false">Cities</button>
+        <button type="button" data-filter="animals" aria-pressed="false">Animals</button>
+    </nav>
+
+    <main class="gallery">
+        <img class="gallery-image" data-category="nature"
+             src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=700"
+             alt="Mountain lake">
+
+        <img class="gallery-image" data-category="city"
+             src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=700"
+             alt="City skyline">
+
+        <img class="gallery-image" data-category="animals"
+             src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=700"
+             alt="Dog">
+
+        <img class="gallery-image" data-category="nature"
+             src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=700"
+             alt="Green forest">
+
+        <img class="gallery-image" data-category="city"
+             src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=700"
+             alt="Modern buildings">
+
+        <img class="gallery-image" data-category="animals"
+             src="https://images.unsplash.com/photo-1551717743-49959800b1f6?w=700"
+             alt="Two dogs">
+    </main>
+
+    <div id="lightbox" class="lightbox" hidden>
+        <button type="button" class="close" aria-label="Close">×</button>
+        <button type="button" class="prev" aria-label="Previous image">❮</button>
+
+        <img id="lightboxImage" src="" alt="">
+        <p id="imageCaption"></p>
+
+        <button type="button" class="next" aria-label="Next image">❯</button>
+    </div>
+
+    <footer>
+        <p>My Image Gallery | HTML, CSS and JavaScript</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

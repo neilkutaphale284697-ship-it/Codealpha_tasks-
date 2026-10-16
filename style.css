@@ -1,0 +1,230 @@
+/* ---------- Base ---------- */
+:root {
+    --bg: #f5f6f8;
+    --text: #1d2433;
+    --muted: #5d6678;
+    --accent: #2f6f8f;
+    --accent-dark: #245770;
+    --overlay: rgba(10, 14, 22, 0.92);
+    --radius: 8px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* IMPORTANT: without this, any "display" rule below overrides the
+   HTML hidden attribute and filtering / the lightbox stop working. */
+[hidden] {
+    display: none !important;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+header {
+    padding: 2.5rem 1.5rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header h1 {
+    margin: 0 0 0.25rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    letter-spacing: -0.01em;
+}
+
+header p {
+    margin: 0;
+    color: var(--muted);
+}
+
+/* ---------- Filters ---------- */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+}
+
+.filters button {
+    padding: 0.5rem 1.1rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--accent);
+    font: inherit;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.filters button:hover,
+.filters button.active {
+    background: var(--accent);
+    color: #fff;
+}
+
+/* ---------- Gallery grid ---------- */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem 2rem;
+}
+
+.gallery-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+    cursor: pointer;
+    filter: grayscale(40%);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+}
+
+.gallery-image:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 24px rgba(20, 30, 50, 0.25);
+    filter: grayscale(0%);
+}
+
+/* ---------- Lightbox ---------- */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--overlay);
+}
+
+/* Fade in each time the lightbox is shown */
+.lightbox:not([hidden]) {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.lightbox img {
+    max-width: 90vw;
+    max-height: 75vh;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox p {
+    margin: 0.9rem 1rem 0;
+    color: #e7ebf2;
+    text-align: center;
+}
+
+.lightbox button {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.lightbox button:hover {
+    background: rgba(255, 255, 255, 0.28);
+    transform: scale(1.1);
+}
+
+.lightbox .close {
+    top: 1rem;
+    right: 1rem;
+}
+
+.lightbox .prev {
+    left: 1rem;
+    top: 50%;
+    margin-top: -1.5rem;
+}
+
+.lightbox .next {
+    right: 1rem;
+    top: 50%;
+    margin-top: -1.5rem;
+}
+
+/* ---------- Footer ---------- */
+footer {
+    padding: 1.5rem;
+    text-align: center;
+    color: var(--muted);
+    border-top: 1px solid #dde1e8;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* ---------- Keyboard focus ---------- */
+button:focus-visible {
+    outline: 3px solid #f2b84b;
+    outline-offset: 2px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .lightbox img {
+        max-height: 70vh;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding-top: 1.5rem;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .lightbox button {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.1rem;
+    }
+
+    .lightbox .prev,
+    .lightbox .next {
+        margin-top: -1.25rem;
+    }
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
