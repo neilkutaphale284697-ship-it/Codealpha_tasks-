@@ -1,65 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Image Gallery</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Music Player</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path fill="currentColor" d="M6 5h4v14H6zM14 5h4v14h-4z"/></symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24"><path fill="currentColor" d="M6 5h2v14H6zM20 5v14L9 12z"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path fill="currentColor" d="M16 5h2v14h-2zM4 5l11 7-11 7z"/></symbol>
+    <symbol id="i-vol" viewBox="0 0 24 24"><path fill="currentColor" d="M3 9v6h4l5 4V5L7 9z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/></symbol>
+    <symbol id="i-mute" viewBox="0 0 24 24"><path fill="currentColor" d="M3 9v6h4l5 4V5L7 9z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16 9l5 6M21 9l-5 6"/></symbol>
+  </svg>
 
-    <header>
-        <h1>My Image Gallery</h1>
-        <p>Explore beautiful moments around the world</p>
-    </header>
+  <main class="app">
+    <section class="player" aria-label="Music player">
+      <div class="disc" id="disc" aria-hidden="true"></div>
+      <h1 id="title">Song title</h1>
+      <p class="artist" id="artist">Artist</p>
 
-    <nav class="filters" aria-label="Filter images by category">
-        <button type="button" data-filter="all" class="active" aria-pressed="true">All</button>
-        <button type="button" data-filter="nature" aria-pressed="false">Nature</button>
-        <button type="button" data-filter="city" aria-pressed="false">Cities</button>
-        <button type="button" data-filter="animals" aria-pressed="false">Animals</button>
-    </nav>
+      <div class="progress-wrap">
+        <input type="range" id="progress" min="0" max="100" step="0.1" value="0" aria-label="Seek">
+        <div class="time"><span id="current">0:00</span><span id="duration">0:00</span></div>
+      </div>
 
-    <main class="gallery">
-        <img class="gallery-image" data-category="nature"
-             src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=700"
-             alt="Mountain lake">
+      <div class="controls">
+        <button id="prev" aria-label="Previous song"><svg><use href="#i-prev"/></svg></button>
+        <button id="play" class="main" aria-label="Play"><svg><use id="play-icon" href="#i-play"/></svg></button>
+        <button id="next" aria-label="Next song"><svg><use href="#i-next"/></svg></button>
+      </div>
 
-        <img class="gallery-image" data-category="city"
-             src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=700"
-             alt="City skyline">
+      <div class="extras">
+        <div class="volume">
+          <button id="mute" aria-label="Mute"><svg><use id="vol-icon" href="#i-vol"/></svg></button>
+          <input type="range" id="volume" min="0" max="1" step="0.01" value="0.8" aria-label="Volume">
+        </div>
+        <label class="switch"><input type="checkbox" id="autoplay" checked><span>Autoplay</span></label>
+      </div>
+    </section>
 
-        <img class="gallery-image" data-category="animals"
-             src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=700"
-             alt="Dog">
+    <section class="playlist" aria-label="Playlist">
+      <h2>Playlist</h2>
+      <ol id="playlist"></ol>
+      <p class="hint">Keys: Space play/pause, ← → seek, ↑ ↓ volume, N next, P previous, M mute</p>
+    </section>
+  </main>
 
-        <img class="gallery-image" data-category="nature"
-             src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=700"
-             alt="Green forest">
-
-        <img class="gallery-image" data-category="city"
-             src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=700"
-             alt="Modern buildings">
-
-        <img class="gallery-image" data-category="animals"
-             src="https://images.unsplash.com/photo-1551717743-49959800b1f6?w=700"
-             alt="Two dogs">
-    </main>
-
-    <div id="lightbox" class="lightbox" hidden>
-        <button type="button" class="close" aria-label="Close">×</button>
-        <button type="button" class="prev" aria-label="Previous image">❮</button>
-
-        <img id="lightboxImage" src="" alt="">
-        <p id="imageCaption"></p>
-
-        <button type="button" class="next" aria-label="Next image">❯</button>
-    </div>
-
-    <footer>
-        <p>My Image Gallery | HTML, CSS and JavaScript</p>
-    </footer>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
